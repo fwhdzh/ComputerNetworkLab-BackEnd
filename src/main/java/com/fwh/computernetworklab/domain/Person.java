@@ -1,0 +1,93 @@
+package com.fwh.computernetworklab.domain;
+
+import com.fwh.computernetworklab.service.PersonService;
+import org.apache.ignite.cache.query.annotations.QuerySqlField;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+
+public class Person {
+
+    @Autowired
+    private static PersonService personService;
+
+//    private static final AtomicLong ID_GEN = new AtomicLong();
+
+    //  会出现每一次重启SpringBoot后ID_GEN变为0的情况
+    // 暂时在IgniteCfg加了个函数为其重新设置初始值解决该问题
+    public static AtomicLong ID_GEN = new AtomicLong();
+
+    /** Person ID (indexed) */
+    @QuerySqlField(index = true)
+    private long id;
+
+    /** Person name(indexed) */
+    @QuerySqlField(index = true)
+    private String username;
+
+    /** Person phone(not-indexed) */
+    @QuerySqlField
+    private String password;
+
+    /** Person roles(not-indexed) */
+    @QuerySqlField
+    private List<Role> roles;
+
+    public Person() {
+    }
+
+    public Person(long id, String name, String password, List<Role> roles) {
+        this.id = id;
+        this.username = name;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public Person(String name, String password, List<Role> roles) {
+        this.id = ID_GEN.incrementAndGet();
+        this.username = name;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public String toString(){
+        return "Person [id=" + id +
+                ", username=" + username +
+                ", password=" + password +
+                ", roles=" + roles.toString() + "]";
+    }
+}
