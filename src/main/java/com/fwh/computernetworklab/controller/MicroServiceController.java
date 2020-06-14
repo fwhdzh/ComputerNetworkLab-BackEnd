@@ -25,47 +25,22 @@ import java.util.List;
 public class MicroServiceController {
 
     @Autowired
-    private TimeService timeService;
+    PrimaryService primaryService;
 
     @Autowired
-    private OilPriceService oilPriceService;
+    SeniorService seniorService;
 
-    @Autowired
-    private PopulationService populationService;
 
-    @Autowired
-    private  DDoSService dDoSService;
-
-    @Autowired
-    private SkyNetService skyNetService;
-
-    @RequestMapping(value = "/microService/dateMicroService", method = RequestMethod.GET)
-    public String getDate() throws ServletException {
-        String date = timeService.getDate();
-        return date;
+    @RequestMapping(value = "/microService/primaryService", method = RequestMethod.GET)
+    public String getPrimaryServiceData() throws ServletException {
+        String data = primaryService.getMessage();
+        return data;
     }
 
-    @RequestMapping(value = "/microService/oilPriceMicroService", method = RequestMethod.GET)
-    public double getOilPrice() throws ServletException {
-        double price = oilPriceService.getPrice();
-        return price;
+    @RequestMapping(value = "/microService/seniorService", method = RequestMethod.GET)
+    public String getSeniorServiceData() throws ServletException {
+        String data = seniorService.getMessage();
+        return data;
     }
 
-    @RequestMapping(value = "/microService/populationService", method = RequestMethod.GET)
-    public long getPopulationPrice() throws ServletException {
-        long population = populationService.getPopulation();
-        return population;
-    }
-
-    @RequestMapping(value = "/microService/DDosAttackService", method = RequestMethod.GET)
-    public String startDDosAttackService() throws ServletException {
-        String message = dDoSService.startDDosAttack();
-        return message;
-    }
-
-    @RequestMapping(value = "/microService/SkyNetService", method = RequestMethod.GET)
-    public String startSkyNetService() throws ServletException {
-        String message = skyNetService.startSkyNetService();
-        return message;
-    }
 }

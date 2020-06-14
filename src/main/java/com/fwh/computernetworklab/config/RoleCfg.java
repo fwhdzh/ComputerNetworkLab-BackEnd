@@ -18,9 +18,7 @@ public class RoleCfg {
 //        final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new RoleFilter());
-        registrationBean.addUrlPatterns("/microService/populationService");
-        registrationBean.addUrlPatterns("/microService/DDosAttackService");
-        registrationBean.addUrlPatterns("/microService/SkyNetService");
+        registrationBean.addUrlPatterns("/microService/seniorService");
         registrationBean.setOrder(2);
         return registrationBean;
     }
