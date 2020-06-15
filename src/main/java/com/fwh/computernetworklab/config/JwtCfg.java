@@ -21,7 +21,4 @@ public class JwtCfg {
         registrationBean.setOrder(1);
         return registrationBean;
     }
-
-
-
 }

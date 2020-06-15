@@ -12,8 +12,6 @@ public class Person {
     @Autowired
     private static PersonService personService;
 
-//    private static final AtomicLong ID_GEN = new AtomicLong();
-
     //  会出现每一次重启SpringBoot后ID_GEN变为0的情况
     // 暂时在IgniteCfg加了个函数为其重新设置初始值解决该问题
     public static AtomicLong ID_GEN = new AtomicLong();

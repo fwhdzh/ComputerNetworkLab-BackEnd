@@ -57,10 +57,6 @@ public class PersonController {
         // Create a person in ignite
         personService.save(new Person(reqPerson.getUsername(), reqPerson.getPassword(), roles));
 
-//        RespResult result = new RespResult();
-//        result.setStatuscode("201 CREATED");
-//        result.setMessage("register success");
-//        result.setData("");
         String result = "0";
         return result;
     }

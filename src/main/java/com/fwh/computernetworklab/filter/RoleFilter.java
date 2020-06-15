@@ -53,11 +53,15 @@ public class RoleFilter extends GenericFilterBean {
 
             List<Role> roles = gson.fromJson(claims.get("roles").toString(),new TypeToken<List<Role>>(){}.getType());
 
-            if (!roles.contains(Role.ADMIN)){
-                throw new ServletException("权限不足");
+            try {
+                if (!roles.contains(Role.ADMIN)){
+                    throw new ServletException("权限不足");
+                }
+                chain.doFilter(req, res);
+            } catch (Exception e){
+                System.out.println(e);
             }
 
-            chain.doFilter(req, res);
         }
     }
 }

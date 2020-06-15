@@ -29,47 +29,32 @@ public class IgniteCfg {
     public Ignite igniteInstance(){
         // 配置一个节点的Configuration
         IgniteConfiguration cfg = new IgniteConfiguration();
-
         // 设置该节点名称
         cfg.setIgniteInstanceName("springDataNode");
-
         // 启用Peer类加载器
         cfg.setPeerClassLoadingEnabled(true);
-
         // 创建一个Cache的配置，名称为PersonCache
         CacheConfiguration ccfg = new CacheConfiguration("PersonCache");
-
         // 设置这个Cache的键值对模型
         ccfg.setIndexedTypes(Long.class, Person.class);
-
         // 把这个Cache放入springDataNode这个Node中
         cfg.setCacheConfiguration(ccfg);
-
         // Ignite persistence configuration.
         // 创建一个持久化存储的设置
         DataStorageConfiguration storageCfg = new DataStorageConfiguration();
-
         // Enabling the persistence.
         // 是这个设置允许持久化存储
         storageCfg.getDefaultDataRegionConfiguration().setPersistenceEnabled(true);
-
         // 设置持久化存储路径
         storageCfg.setStoragePath("/opt/storage");
-
-
-
         // Applying settings.
         // 把这个Configuration放到springDataNode这个Node中
         cfg.setDataStorageConfiguration(storageCfg);
-
         // 启动这个节点
         Ignite ignite = Ignition.start(cfg);
-
         // 激活集群
         ignite.cluster().active(true);
-
         return ignite;
-
     }
 
 
